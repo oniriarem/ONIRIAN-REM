@@ -1,0 +1,802 @@
+/* --- BARRA DE NAVEGACIÓN ESTILO ONIRIAN --- */
+
+/* 1. Scroll fluido en toda la página */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 2. Tamaño de la barra de scroll */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* 3. El carril por donde se mueve (el fondo de la barra) */
+::-webkit-scrollbar-track {
+    background: #000; /* Negro puro para que se camufle con el fondo */
+}
+/* 4. La pieza que se mueve (el tirador) - AHORA SIEMPRE VISIBLE */
+::-webkit-scrollbar-thumb {
+    background: #e3b04b; /* El dorado de tu marca desde el principio */
+    border-radius: 10px;
+    border: 3px solid #000; /* Un margen negro para que parezca una línea elegante y fina */
+}
+
+/* 5. Al pasar el ratón se puede iluminar un poco más si quieres */
+::-webkit-scrollbar-thumb:hover {
+    background: #fff; /* Cambia a blanco al tocarla para dar feedback */
+}
+
+/* =======================================================
+   1. ESTILOS BASE Y TIPOGRAFÍA
+   ======================================================= */
+body {
+    background: #000;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+/* =======================================================
+   2. NAVEGACIÓN (HEADER)
+   ======================================================= */
+header {
+    background: #000;
+    border-bottom: 1px solid #222;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: nowrap;
+}
+
+nav ul li { margin: 0 15px; }
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+/* Esto asegura que en pantallas grandes NUNCA se vea */
+@media (min-width: 601px) {
+    .menu-icon {
+        display: none !important;
+    }
+    
+    /* Y nos aseguramos de que el menú normal sí se vea horizontal */
+    nav ul {
+        display: flex !important;
+        flex-direction: row !important;
+        position: static !important; /* Quita el modo "columna flotante" del móvil */
+        width: auto !important;
+        background: transparent !important;
+    }
+}
+
+/* Menú Desplegable (Explorar) */
+.dropdown { position: relative; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #000;
+    border: 1px solid #333;
+    min-width: 160px;
+    top: 100%;
+    left: 0;
+}
+.dropdown-content a {
+    display: block;
+    padding: 12px;
+    font-size: 0.7rem;
+    border-bottom: 1px solid #111;
+}
+.dropdown:hover .dropdown-content { display: block; }
+
+/* =======================================================
+   3. SECCIÓN DE INICIO (HERO Y FRASES)
+   ======================================================= */
+.hero-compacto {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero-compacto h1 {
+    font-size: clamp(1.8rem, 8vw, 5rem);
+    letter-spacing: 12px;
+    margin: 0;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.hero-compacto .frase {
+    color: #e0dada;
+    font-style: italic;
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.hero-compacto .frase span {
+    display: block;
+    margin-top: 10px;
+    color: #aca3a3;
+    font-size: 0.9rem;
+}
+
+/* =======================================================
+   4. GRID DE CATEGORÍAS (BLOQUES DE 4)
+   ======================================================= */
+.grid-categorias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 1100px) {
+    .grid-categorias {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.card-mini { 
+    width: 100%; 
+    cursor: pointer; 
+    text-align: center;
+}
+
+.img-mini-bg { 
+    height: 160px; 
+    background-size: cover; 
+    background-position: center; 
+    border: 1px solid #333; 
+    filter: grayscale(100%); 
+    transition: 0.5s ease; 
+}
+
+.card-mini:hover .img-mini-bg, 
+.card-mini.activa .img-mini-bg { 
+    filter: grayscale(0%); 
+    border-color: #e3b04b; 
+    box-shadow: 0 0 15px rgba(227, 176, 75, 0.2);
+}
+
+.card-mini h3 {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.card-mini.activa h3 { color: #e3b04b; }
+
+/* =======================================================
+   5. GALERÍA
+   ======================================================= */
+.contenedor-galeria-fija {
+    column-count: 4;
+    column-gap: 20px;
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.card-img-full {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease, transform 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #222;
+    break-inside: avoid;
+}
+
+.card-img-full:hover {
+    filter: grayscale(0%);
+}
+
+.card-img-full.visto {
+    filter: grayscale(0%) !important;
+    border-color: #e3b04b !important;
+}
+
+@media (max-width: 1000px) { .contenedor-galeria-fija { column-count: 3; } }
+@media (max-width: 700px) { .contenedor-galeria-fija { column-count: 2; } }
+@media (max-width: 400px) { .contenedor-galeria-fija { column-count: 1; } }
+
+/* =======================================================
+   6. MODAL Y EFECTO ZOOM
+   ======================================================= */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.96);
+    z-index: 2000;
+}
+
+.modal-content {
+    width: 95%; height: 90vh; margin: 2vh auto;
+    background: #000; border: 1px solid #333;
+    position: relative; overflow: hidden;
+}
+
+.modal-flex { display: flex; height: 100%; flex-direction: row; }
+
+.modal-izq {
+    flex: 1.6; display: flex; flex-direction: column;
+    border-right: 1px solid #222; background: #050505;
+}
+
+.contenedor-foto-principal {
+    flex: 1; display: flex; justify-content: center; align-items: center;
+    padding: 20px; overflow: hidden;
+}
+
+#modalImage {
+    max-width: 100%; max-height: 100%; object-fit: contain;
+    cursor: zoom-in; transition: 0.3s;
+}
+
+.foto-zoom {
+    position: fixed !important; top: 0; left: 0; width: 100vw !important; height: 100vh !important;
+    max-width: 100vw !important; max-height: 100vh !important; background: #000; z-index: 3000;
+    cursor: zoom-out !important; object-fit: contain !important; padding: 0;
+}
+
+.titulo-foto-modal {
+    font-size: 1.2rem; color: #fff; padding: 10px; margin: 0; background: rgba(0,0,0,0.8);
+}
+
+.tira-pelicula-wrapper {
+    height: 90px; background: #111; display: flex; align-items: center; padding: 10px; border-top: 1px solid #333;
+}
+
+.tira-pelicula { display: flex; gap: 10px; overflow-x: auto; width: 100%; }
+.tira-pelicula img { height: 60px; cursor: pointer; border: 1px solid #333; filter: grayscale(100%); transition: all 0.3s ease; }
+.tira-pelicula img:hover { filter: grayscale(0%); border-color: #e3b04b; transform: scale(1.05); }
+
+.modal-der { flex: 1; padding: 40px; overflow-y: auto; background: #000; }
+.modal-der h2 { text-align: left; margin-bottom: 30px; font-size: 2rem; }
+
+.dato { margin-bottom: 30px; border-left: 2px solid #e3b04b; padding-left: 20px; }
+.dato strong { 
+    display: block; color: #ffd700; text-transform: uppercase; font-size: 0.9rem;
+    letter-spacing: 3px; margin-bottom: 8px; font-weight: 700; font-family: 'Cinzel', serif;
+}
+.dato p { margin: 0; color: #e0e0e0; line-height: 1.8; font-size: 1rem; }
+/* --- BOTÓN CERRAR MODAL --- */
+/* --- BOTÓN CERRAR: ÚNICO Y DEFINITIVO --- */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 60px; /* Distancia de seguridad para que NO se meta en la barra */
+    color: #e3b04b; /* Tu dorado */
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    z-index: 9999; /* Para que siempre esté por encima de la foto */
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.5); /* Un fondo oscuro suave para que se lea bien sobre cualquier foto */
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.close:hover {
+    color: #fff;
+    background: #e3b04b; /* Al pasar el ratón se vuelve dorado con letras blancas */
+}
+
+
+
+/* Ajuste para móviles: que no se pierda el botón */
+@media (max-width: 768px) {
+    .close {
+        right: 20px;
+        top: 15px;
+        font-size: 0.9rem;
+    }
+}
+
+
+/* =======================================================
+   7. SECCIÓN SOBRE MÍ
+/* =======================================================
+   ESTILOS SECCIÓN SOBRE MÍ (Foto Izq - Texto Der)
+   ======================================================= */
+.sobre-mi-container {
+    display: flex;
+    flex-direction: row; /* Alineación horizontal */
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 80px 10%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Contenedor de la Imagen */
+.autor-imagen {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.foto-perfil-bw {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    filter: grayscale(100%); /* Empieza en Blanco y Negro */
+    border: 1px solid #333;
+    transition: all 0.6s ease;
+    cursor: pointer;
+}
+
+/* Efecto al pasar el ratón (sin color, solo un poco de luz) */
+.foto-perfil-bw:hover {
+    filter: grayscale(100%) brightness(1.2);
+}
+
+/* CLASE ACTIVA (Se activa al pinchar): Pasa a Color */
+.foto-perfil-bw.foto-activa {
+    filter: grayscale(0%) !important;
+    border-color: #e3b04b !important;
+    box-shadow: 0 0 30px rgba(227, 176, 75, 0.4);
+}
+
+/* Contenedor del Texto */
+.autor-texto {
+    flex: 0 0 50%;
+    text-align: left;
+}
+
+.autor-texto h2 {
+    font-family: 'Cinzel', serif;
+    text-align: left;
+    color: #e3b04b; /* Dorado */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.autor-texto p {
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.autor-firma {
+    margin-top: 30px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    color: #e3b04b;
+    letter-spacing: 4px;
+}
+
+/* Ajuste para Móviles */
+@media (max-width: 900px) {
+    .sobre-mi-container {
+        flex-direction: column; /* Se ponen uno debajo de otro */
+        text-align: center;
+        padding: 40px 20px;
+    }
+    .autor-imagen, .autor-texto {
+        flex: 0 0 100%;
+    }
+    .autor-texto h2 {
+        text-align: center;
+    }
+}
+/* =======================================================
+   8. AJUSTES PARA MÓVIL
+   ======================================================= */
+@media (max-width: 900px) {
+    .foto-perfil-bw { width: 300px; }
+    .modal-flex { flex-direction: column; }
+    .modal-izq { border-right: none; border-bottom: 1px solid #222; height: 50vh; }
+    .modal-content { height: 95vh; }
+    .hero-compacto h1 { letter-spacing: 5px; }
+    .sobre-mi-container { padding: 50px 20px; text-align: center; }
+    .autor-texto { text-align: center; }
+    .autor-texto h2 { text-align: center; }
+}
+/* --- ANIMACIÓN DE APARICIÓN ONÍRICA --- */
+@keyframes aparecerSuave {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Empieza un poco más abajo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Sube a su posición original */
+    }
+}
+
+/* Aplicamos la animación a las tarjetas de la galería */
+/* Foto por defecto: Blanco y negro *//* 1. ESTADO INICIAL: Blanco y negro total */
+.card-img-full {
+    filter: grayscale(100%) brightness(0.8); /* Gris y un pelín oscuras */
+    transition: all 0.6s ease-in-out;
+    cursor: pointer;
+}
+
+/* 2. AL PASAR EL RATÓN: Se iluminan y se ven un poco mejor, pero siguen en gris */
+.card-img-full:hover {
+    filter: grayscale(50%) brightness(1.1); /* Pierden un poco de gris y brillan */
+    transform: scale(1.03); /* Un pequeño zoom */
+}
+
+/* 3. IMAGEN YA VISTA: Color total (esta clase la pone el JavaScript) */
+/* FORZAR BLANCO Y NEGRO */
+.card-img-full {
+    filter: grayscale(100%) !important; 
+    -webkit-filter: grayscale(100%) !important; /* Para Safari y Chrome */
+    transition: filter 0.6s ease !important;
+}
+
+/* Solo se pone en color si tiene la clase visto */
+.card-img-full.visto {
+    filter: grayscale(0%) !important;
+    -webkit-filter: grayscale(0%) !important;
+}
+
+/* Aplicamos la animación también a los bloques del inicio */
+.card-mini {
+    animation: aparecerSuave 0.6s ease-out forwards;
+}
+/* --- FOOTER ARTÍSTICO --- */
+footer {
+    background-color: #000; border-top: 1px solid #111; padding: 100px 20px 60px; margin-top: 100px; text-align: center;
+}
+.footer-line { width: 40px; height: 2px; background: #e3b04b; margin: 0 auto 40px; box-shadow: 0 0 10px rgba(227, 176, 75, 0.5); }
+.footer-quote { font-family: 'Raleway', sans-serif; font-style: italic; color: #888; font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 80px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.footer-brand span { font-family: 'Cinzel', serif; letter-spacing: 12px; font-size: 1.8rem; display: block; color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+.sub-brand { color: #cccccc !important; font-size: 0.75rem; letter-spacing: 6px; margin-top: 15px; text-transform: uppercase; }
+.footer-bottom { margin-top: 100px; padding-top: 30px; border-top: 1px solid #0a0a0a; }
+.copyright { color: #eeeeee !important; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
+/* 1. Mantenemos la subida para las fotos y bloques del inicio */
+.card-img-full, .card-mini {
+    animation: aparecerSuave 0.8s ease-out forwards;
+}
+
+@media (max-width: 600px) {
+    /* 1. Hacemos que el texto se adapte al ancho de la pantalla */
+    .footer-brand span {
+        font-size: clamp(1.2rem, 5vw, 1.8rem) !important; /* Tamaño flexible */
+        letter-spacing: 4px !important; /* Reducimos el espaciado para que quepa */
+        white-space: normal !important; /* Permite que si es necesario, baje a otra línea en lugar de cortarse */
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 2. Ajustamos también el subtítulo por si acaso */
+    .sub-brand {
+        letter-spacing: 3px !important;
+        font-size: 0.65rem !important;
+    }
+
+    /* 3. Reducimos los márgenes laterales del footer para ganar espacio */
+    footer {
+        padding: 60px 10px 40px !important;
+    }
+}
+
+/* 2. Aplicamos el efecto a la sección Sobre Mí */
+#sobre-mi-seccion {
+    /* Quitamos cualquier animación previa que pudiera estorbar */
+    animation: none;
+}
+
+/* La imagen de la izquierda sube suavemente */
+.autor-imagen {
+    animation: aparecerSuave 1s ease-out forwards;
+}
+
+/* El texto de la derecha sube un pelín después (le da elegancia) */
+.autor-texto {
+    animation: aparecerSuave 1.2s ease-out forwards;
+}
+
+/* --- Definición de la animación (asegúrate de tenerla así) --- */
+
+@keyframes aparecerSuave {
+    from {
+        opacity: 0;
+        transform: translateY(30px); /* Empieza 30px más abajo */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    } 
+/* --- FORZANDO EL EFECTO EN EL MODAL --- */
+
+/* Esto afectará a cualquier título H3 o H4 que esté dentro de la parte de texto del modal */
+.modal-detalle h3, 
+.modal-detalle h4,
+#modal-info-container h3 {
+    color: #e3b04b !important; /* Dorado */
+    font-family: 'Cinzel', serif !important;
+    letter-spacing: 2px !important;
+    transition: all 0.4s ease !important;
+    display: inline-block;
+    margin-top: 20px;
+    cursor: pointer;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* EL EFECTO: Cuando pases el ratón por encima del título (Interpretación, etc) */
+.modal-detalle h3:hover, 
+.modal-detalle h4:hover,
+#modal-info-container h3:hover {
+    color: #ffffff !important; /* Cambia a blanco */
+    text-shadow: 0 0 15px #e3b04b !important; /* Brillo dorado fuerte */
+    padding-left: 10px; /* Se mueve un poco a la derecha */
+}
+
+/* El texto de la descripción */
+#modal-descripcion, 
+.modal-detalle p {
+    color: #cccccc !important;
+    line-height: 1.8 !important;
+    font-size: 1.1rem !important;
+    transition: color 0.3s ease;
+}
+
+/* Al pasar el ratón por el texto largo, se ilumina un poco para leer mejor */
+#modal-descripcion:hover {
+    color: #ffffff !important;
+}
+/* --- EFECTO VELO ONÍRICO EN LA GALERÍA --- */
+
+.card-img-full {
+    /* Preparamos la transición: suave y lenta (0.8 segundos) */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                filter 0.5s ease, 
+                border 0.5s ease !important;
+    border: 1px solid transparent; /* El borde ya está ahí, pero invisible */
+}
+
+.card-img-full:hover {
+    transform: scale(1.04); /* Un zoom muy ligero, como si el sueño se acercara */
+    filter: brightness(1.15) contrast(1.1); /* Se ilumina un poco */
+    border-color: rgba(227, 176, 75, 0.6); /* Aparece el marco dorado */
+    cursor: pointer;
+    z-index: 10; /* Se pone por encima de las demás al crecer */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad */
+}
+
+/* --- CONFIGURACIÓN PARA MÓVILES DESDE 360px --- *//* ... aquí arriba estará todo tu código anterior (colores, fuentes, etc.) ... */
+
+/* --- LO ÚLTIMO EN TU ARCHIVO --- */
+/* --- CONFIGURACIÓN FINAL PARA MÓVIL (2 COLUMNAS CENTRADAS) --- */
+@media (max-width: 600px) {
+    /* Ajustamos el contenedor principal */
+    .grid-container {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important; /* Esto centra las fotos si sobra espacio */
+        gap: 10px !important;
+        padding: 10px !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* Ajustamos cada tarjeta de foto */
+    .grid-item {
+        /* Calculamos el ancho: 50% de la pantalla menos el hueco del medio */
+        flex: 0 1 calc(50% - 15px) !important;
+        min-width: calc(50% - 15px) !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    /* Aseguramos que la imagen ocupe todo su espacio */
+    .grid-item img {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        border-radius: 8px;
+    }/* =======================================================
+   9. MENÚ HAMBURGUESA (CORREGIDO)
+   ======================================================= */
+
+/* 1. Icono de la hamburguesa: Oculto en PC */
+.menu-icon {
+    display: none;
+    color: #e3b04b; /* Dorado en lugar de rojo para que quede bien */
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 10px;
+}
+
+/* 2. Ajustes para Móvil (600px o menos) */
+@media (max-width: 600px) {
+    /* 1. Mostramos el icono */
+    .menu-icon {
+        display: block !important;
+        text-align: right;
+        position: relative;
+        z-index: 1002;
+    }
+
+    /* 2. Configuramos el menú para que salga a la DERECHA y sea vertical */
+    #nav-links {
+        display: none; /* Escondido por defecto */
+        flex-direction: column !important;
+        position: fixed; /* Fixed para que no se mueva al hacer scroll */
+        top: 60px;
+        right: 0;
+        width: 250px; /* Un ancho elegante para que no tape todo */
+        background: rgba(0, 0, 0, 0.95);
+        border-left: 1px solid #e3b04b;
+        height: 100vh;
+        padding: 20px !important;
+        z-index: 1001;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    }
+
+    /* 3. La clase que el JS activará */
+    #nav-links.active {
+        display: flex !important;
+    }
+
+    /* 4. Ajuste de los enlaces para que no se vean pegados */
+    #nav-links li {
+        margin: 20px 0 !important;
+        text-align: left;
+        width: 100%;
+        border-bottom: 1px solid #111;
+        padding-bottom: 10px;
+    }
+
+    #nav-links li a {
+        font-size: 0.9rem !important;
+        display: block;
+    }
+
+    /* 5. El submenú Explorar en móvil */
+    .dropdown-content {
+        position: static; 
+        background: #0a0a0a;
+        width: 100%;
+        border: none;
+    }
+}
+@media (max-width: 600px) {
+    /* Evitamos que el submenú se abra solo */
+    .dropdown:hover .dropdown-content {
+        display: none; 
+    }
+
+    /* Creamos una clase para abrirlo con un clic */
+    .dropdown.abierto-movil .dropdown-content {
+        display: block !important;
+        position: static; /* Para que empuje los enlaces hacia abajo y no flote */
+        width: 100%;
+        background: #111;
+    }
+}
+}
+/* --- BOTÓN VOLVER ARRIBA --- */
+.btn-subir {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(227, 176, 75, 0.8); /* Tu dorado con transparencia */
+    color: #000;
+    border-radius: 50%; /* Redondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1500;
+    transition: all 0.4s ease;
+    opacity: 0; /* Oculto al inicio */
+    visibility: hidden;
+    transform: translateY(20px); /* Un pequeño movimiento hacia abajo */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Flecha mirando hacia arriba */
+.btn-subir {
+    transform: rotate(-90deg); 
+}
+
+/* Efecto al pasar el ratón */
+.btn-subir:hover {
+    background-color: #fff;
+    transform: rotate(-90deg) scale(1.1);
+}
+
+/* Clase que activaremos con JavaScript al hacer scroll */
+.btn-subir.mostrar {
+    opacity: 1;
+    visibility: visible;
+    transform: rotate(-90deg) translateY(0);
+}
+
+/* Ajuste para móviles: un poco más pequeño para no estorbar */
+@media (max-width: 600px) {
+    .btn-subir {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+}
+@media (max-width: 600px) {
+    /* 1. Evitamos que el texto choque con los bordes físicos del móvil */
+    .modal-der, 
+    .autor-texto {
+        padding: 30px 25px !important; /* Más espacio a los lados y arriba */
+    }
+
+    /* 2. Mejoramos la legibilidad de los párrafos de los sueños */
+    .dato p, 
+    .autor-texto p {
+        font-size: 1.05rem !important; /* Un pelín más grande para no forzar la vista */
+        line-height: 1.8 !important;   /* Separación entre líneas generosa */
+        letter-spacing: 0.5px;         /* Un suspiro de espacio entre letras */
+        margin-bottom: 20px;
+        color: #ddd;                   /* Un gris muy claro, más suave que el blanco puro */
+    }
+
+    /* 3. Títulos con autoridad pero sin apreturas */
+    .modal-der h2, 
+    .autor-texto h2 {
+        font-size: 1.6rem !important;
+        margin-bottom: 30px !important;
+        line-height: 1.3;
+    }
+
+    /* 4. Los bloques de "Sueño", "Interpretación", etc. */
+    .dato {
+        margin-bottom: 35px !important; /* Más separación entre bloques */
+        border-left: 2px solid #e3b04b;
+        padding-left: 15px;
+    }
+}
+/* --- EFECTO REVELACIÓN --- */
+
+/* Estado inicial: invisible y un poco más abajo */
+.revelar {
+    opacity: 0;
+    transform: translateY(40px); /* Empieza 40px abajo */
+    transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000); /* Transición suave tipo seda */
+}
+
+/* Estado cuando el JS detecta que ya es visible */
+.revelado {
+    opacity: 1;
+    transform: translateY(0); /* Sube a su sitio */
+}

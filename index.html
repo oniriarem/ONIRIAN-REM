@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onirian-Rem</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <nav>
+        <!-- Icono hamburguesa: solo se verá en el móvil -->
+        <div class="menu-icon" id="menu-icon">
+    &#9776; 
+</div>
+
+        <!-- Lista única de navegación -->
+        <ul id="nav-links">
+            <li><a href="javascript:void(0)" onclick="mostrarInicio()">Inicio</a></li>
+            
+            <li class="dropdown">
+                <a href="javascript:void(0)">Explorar ▼</a>
+                <div class="dropdown-content" id="menu-desplegable">
+                    <!-- Aquí se genera tu contenido dinámico -->
+                </div>
+            </li>
+            
+            <li><a href="javascript:void(0)" onclick="filtrarPor('todos')">Sueños</a></li>
+            <li><a href="javascript:void(0)" onclick="mostrarSobreMi()">Sobre mí</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main id="seccion-inicio">
+        <section class="hero-compacto">
+            <h1>Onirian-Rem</h1>
+            <h3 class="frase">"Los sueños son amenudo más profundos cuando parecen más locos" <br> <span>— Sigmund Freud</span></h3>
+        </section>
+        <div id="contenedor-categorias" class="grid-categorias"></div>
+    </main>
+
+    <section id="seccion-imagenes" style="display: none;">
+        <h2 id="titulo-seccion-dinamico" class="titulo-seccion"></h2>
+        <div id="contenedor-galeria" class="masonry-grid"></div>
+    </section>
+
+   <section id="sobre-mi-seccion" style="display: none;">
+    <div class="sobre-mi-container">
+        
+        <div class="autor-imagen">
+            <img src="img/perfil.jpeg" alt="Autor" class="foto-perfil-bw" id="foto-perfil" onclick="activarColorPerfil()">
+        </div>
+
+        <div class="autor-texto">
+            <h2>EL ALMA TRAS EL SUEÑO</h2>
+            <h3><strong>Bienvenido a mi mundo onírico. Aquí los sueños cobran vida.</strong></h3>
+            <p>Más de diez años capturando lo que el ojo no ve pero el alma siente. En esta página, comparto más de una década de sueños que han sido trasformados en imágenes.</p>
+            <p>Cada pieza es un rompecabezas: una imagen que cobra vida para revelar una explicación, una emoción o una verdad que solo el sueño se atrevió a decir en voz alta.</p>
+            <div class="autor-firma">Onirian-Rem</div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- FOOTER (Añadido de tu CSS) -->
+    <footer>
+        <div class="footer-line"></div>
+        <p class="footer-quote">"El sueño es la liberación del espíritu de la presión de la naturaleza externa."</p>
+        <div class="footer-brand">
+            <span>ONIRIAN-REM</span>
+            <div class="sub-brand">DIARIO DE SUEÑOS</div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2026 Onirian-Rem.    Diseño y desarrollo web MDPRF.<br> <br>Todos los derechos reservados.</br>
+        </div>
+    </footer>
+
+    <!-- Estructura del Modal -->
+    <div id="modalSueno" class="modal">
+        <span class="close" onclick="cerrarElModal()">CERRAR</span>
+        <div class="modal-content">
+            <div class="modal-flex">
+                <div class="modal-izq">
+                    <div class="contenedor-foto-principal">
+                        <img id="modalImage" src="" alt="Sueño" onclick="toggleZoom()">
+                    </div>
+                    <p id="titulo-foto-pie" class="titulo-foto-modal"></p>
+                    <div class="tira-pelicula-wrapper">
+                        <div class="tira-pelicula" id="tira-pelicula"></div>
+                    </div>
+                </div>
+                <div class="modal-der">
+                    <h2 id="modalTitle"></h2>
+                    <div class="dato"><strong>Sueño</strong><p id="txtSueno"></p></div>
+                    <div class="dato"><strong>Reflexión Filosófica</strong><p id="txtReflexion"></p></div>
+                    <div class="dato"><strong>Interpretación</strong><p id="txtInterpretacion"></p></div>
+                    <div class="dato"><strong>Poema</strong><p id="txtPoema"></p></div>
+                    <div class="dato"><strong>Impacto</strong><p id="txtImpacto"></p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="datos.js"></script>
+    <script src="script.js"></script>
+  <script>
+function cerrarElModal() {
+    // Usamos el nombre REAL que nos ha chivado la consola: modalSueno
+    const modal = document.getElementById('modalSueno');
+    
+    if (modal) {
+        modal.style.display = "none";
+        console.log("¡Cerrado! Por fin encontramos el nombre correcto.");
+    }
+}
+
+// También para que se cierre si pinchan fuera de la foto
+window.onclick = function(event) {
+    const modal = document.getElementById('modalSueno');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+<!-- Botón Volver Arriba -->
+<div id="btn-subir" class="btn-subir">
+    &#10148; <!-- Una flecha elegante -->
+</div>
+</body>
+
+</html>
